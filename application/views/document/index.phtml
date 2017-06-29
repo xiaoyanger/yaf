@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title><?=$top['title']?></title>
+    <link href="/static/bootstrap-3/css/bootstrap.min.css" rel="stylesheet">
+    <!--<link href="/static/apidoc/css/patch.css" rel="stylesheet">-->
+    <!--<link href="/static/apidoc/css/docs.min.css" rel="stylesheet">-->
+    <!--[if lt IE 9]>
+    <script src="http://v3.bootcss.com/assets/js/ie8-responsive-file-warning.js"></script>
+    <![endif]-->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="http://cdn.bootcss.com/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <style type="text/css">
+        /*右边菜单*/
+        .right_side{position:fixed;top:0px;width:300px;background:#fff;right: 2%;}
+        .right_side.fixed{position:fixed;z-index:998;top:34px;left:0px;}
+
+        .right_side .l_title{height:30px;padding-left:40px;padding-bottom:44px;font:700 14px/44px 'simsun';background:#e1e1e1  no-repeat 14px -367px;}
+        .right_side .l_zy_list{height:2000px;padding-bottom:20px;*position:relative;*zoom:1;}
+        .right_side .l_zj{padding:8px 0 8px 14px;font:700 14px/24px 'simsun';color:#666;}
+        .right_side .l_j{float:left;width:34px;padding:13px 0;color:#a6a6a6;}
+        .right_side li{padding-left:14px;}
+        .right_side li:hover{background:#E9EBED;}
+        .right_side li a{display:block;}
+        .right_side li a *{cursor:pointer;}
+
+        /*nanoScroller 插件*/
+        .nano {position:relative;width:100%;height:100%;overflow:hidden;}
+        .nano > .nano-content {position:absolute;overflow:scroll;overflow-x:hidden;top:0;right:0;bottom:0;left:0;}
+        .nano > .nano-content:focus{outline: thin dotted;}
+        .nano > .nano-content::-webkit-scrollbar {visibility:hidden;}
+        .has-scrollbar > .nano-content::-webkit-scrollbar {visibility:visible;}
+        .nano > .nano-pane {background:#D0D2D5;position:absolute;width:12px;right:0;top:0;bottom:0;visibility:hidden\9;-webkit-transition:.2s;transition:.2s;overflow-y:hidden;}
+        .nano > .nano-pane > .nano-slider {background:#A6A8AA;position:relative;}
+        .nano:hover > .nano-pane, .nano-pane.active, .nano-pane.flashed{visibility:visible\9;opacity:0.99;}
+    </style>
+</head>
+<body>
+    <div id="content" class="bs-docs-header">
+        <div class="container">
+            <h3><?php echo $top['title'] ;?></h3>
+            <h4><a href="">最后修正日期:<?php echo $top['lastchange'];?></a></h4>
+        </div>
+    </div>
+    <div class="container bs-docs-container">
+        <div class="row">
+            <div class="col-md-9" role="main">
+                <!-------start------>
+                <?php foreach ($data as $key=>$val){?>
+                    <div class="bs-docs-section">
+                        <!--<h1 id="1a42f5ffd8485b0483311aa425963884" class="page-header">用户模块</h1>-->
+                        <!--<p class="lead"></p>-->
+                        <h2 id="<?php echo md5($val['docTitle']);?>"><?php echo $key;?>.<?php echo $val['docTitle'];?></h2>
+                        <p>接口参数信息</p>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped">
+                                <thead>
+                                <tr>
+                                    <th style="width: 150px;">属性</th>
+                                    <th>描述</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>链接</td>
+                                    <td><?php echo $apiroot .$val['docLicense'];?></td>
+                                </tr>
+                                <tr>
+                                    <td>版本号</td>
+                                    <td><?php echo $val['docVersion'];?></td>
+                                </tr>
+                                <tr>
+                                    <td>请求方式</td>
+                                    <td><?php echo $val['docRequestType'];?></td>
+                                </tr>
+                                <tr>
+                                    <td>作者及联系方式</td>
+                                    <td><?php echo $val['docAuthName'].'---'.$val['docAuthContact'];?></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p>请求参数信息</p>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped">
+                                <thead>
+                                <tr>
+                                    <th style="width: 150px;">参数名</th>
+                                    <th style="width: 167px;">类型</th>
+                                    <th style="width: 383px;">描述</th>
+                                    <th>必传</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <?php foreach  ($val['docParam'] as $v) {?>
+                                    <tr>
+                                        <td><?php echo $v['name'];?></td>
+                                        <td><?php echo $v['type'];?></td>
+                                        <td><?php echo $v['description'];?></td>
+                                        <td><?php echo $v['isneed']=='R'?"是":"否";?></td>
+                                    </tr>
+                                <?php } ?>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p>返回参数信息</p>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped">
+                                <thead>
+                                <tr>
+                                    <th style="width: 150px;">参数名</th>
+                                    <th style="width: 167px;">类型</th>
+                                    <th>描述</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <?php foreach  ($val['docField'] as $v) {?>
+                                    <tr>
+                                        <td><?php echo $v['name'];?></td>
+                                        <td><?php echo $v['type'];?></td>
+                                        <td><?php echo $v['description'];?></td>
+                                    </tr>
+                                <?php }?>
+                                </tbody>
+                            </table>
+                        </div>
+                        <?php if (!empty($val['docFieldinfo'])) { ?>
+                        <p>data数据参数信息</p>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped">
+                                <thead>
+                                <tr>
+                                    <th style="width: 150px;">参数名</th>
+                                    <th style="width: 167px;">类型</th>
+                                    <th>描述</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <?php foreach ($val['docFieldinfo'] as $v){?>
+                                    <tr>
+                                        <td><?php echo $v['name'];?></td>
+                                        <td><?php echo $v['type'];?></td>
+                                        <td><?php echo $v['description'];?></td>
+                                    </tr>
+                                <?php }?>
+                                </tbody>
+                            </table>
+                        </div>
+                        <?php }?>
+                        <p>返回JSON样例：</p>
+                        <?php $jsonData = json_decode($val['jsonData'],true);?>
+                        <pre><?php echo json_encode($jsonData,JSON_UNESCAPED_UNICODE|JSON_PRETTY_PRINT);?></pre>
+                    </div>
+                <?php }?>
+                <!--end---->
+            </div>
+            <div class="right_side">
+                <div class="l_title">文档目录&nbsp;&nbsp;&nbsp;<a href="/document/index/"/>返回首页</div>
+                <div class="l_zy_list nano has-scrollbar" id="divClassList" style="height: 450px;">
+                    <div class="nano-content" tabindex="0" style="right: -17px;">
+                        <div class="l_zj"></div>
+                        <ul>
+                            <?php
+                            foreach($data as $key=>$val){
+                                ?>
+                                <li>
+                                    <a href="#<?php echo md5($val['docTitle']); ?>"><?=$key?>.<?php echo $val['docTitle'];?></a>
+                                </li>
+                                <?php
+                            }
+                            ?>
+                        </ul>
+                    </div>
+                    <div class="nano-pane" style="display: block;">
+                        <div class="nano-slider" style="height: 0px; transform: translate(0px, 0px);"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
