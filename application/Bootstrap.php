@@ -8,7 +8,7 @@
 /**
  * Class Bootstrap
  */
-class Bootstrap extends Yaf_Bootstrap_Abstract
+class Bootstrap extends Yaf\Bootstrap_Abstract
 {
     /**
      * _init_set
@@ -19,7 +19,8 @@ class Bootstrap extends Yaf_Bootstrap_Abstract
     public function _init_set()
     {
         //配置文件
-        Yaf_Registry::set("config", Yaf_Application::app()->getConfig());
+        Yaf\Session::getInstance()->start();
+        Yaf\Registry::set("config", Yaf\Application::app()->getConfig());
     }
     /**
      * _initConstant 引入常量配置文件
@@ -29,7 +30,7 @@ class Bootstrap extends Yaf_Bootstrap_Abstract
      */
     public function _initConstant()
     {
-        Yaf_Loader::import(APP_PATH . 'conf/Constant.php');
+        Yaf\Loader::import(APP_PATH . 'conf/Constant.php');
     }
 
     /**
@@ -43,7 +44,7 @@ class Bootstrap extends Yaf_Bootstrap_Abstract
     public function _initView()
     {
         // 关闭自动渲染
-        Yaf_Dispatcher::getInstance()->disableView();
+        Yaf\Dispatcher::getInstance()->disableView();
     }
 
     /**
@@ -65,7 +66,7 @@ class Bootstrap extends Yaf_Bootstrap_Abstract
      * @author
      * @date 2016-05-20 17:07:27
      */
-    public function _initRoute(Yaf_Dispatcher $dispatcher)
+    public function _initRoute(Yaf\Dispatcher $dispatcher)
     {
 
     }
@@ -76,7 +77,7 @@ class Bootstrap extends Yaf_Bootstrap_Abstract
      * @author yangbao &nbsp;&nbsp; <a href="mailto:yangbaophp@163.com">yangbaophp@163.com</a>
      * @date 2016-06-20 10:44:29
      */
-    function _initBase(Yaf_Dispatcher $dispatcher)
+    function _initBase(Yaf\Dispatcher $dispatcher)
     {
         set_exception_handler(function (\Throwable $e) {
             $log_msg = $e->getMessage() . ' in ' . $e->getFile() . ' on line ' . $e->getLine();
@@ -121,7 +122,7 @@ class Bootstrap extends Yaf_Bootstrap_Abstract
      */
     public function _initAutoload()
     {
-        Yaf_Loader::import(PATH_ROOT . 'vendor/autoload.php');
+        Yaf\Loader::import(PATH_ROOT . 'vendor/autoload.php');
     }
 
     /**

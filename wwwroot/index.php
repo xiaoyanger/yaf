@@ -13,11 +13,12 @@ if(in_array($hostname, $production_servers)) { // 生产环境
 }
 
 // 项目根目录
+
 define('APP_PATH', realpath(__DIR__ . '/../') . DIRECTORY_SEPARATOR);
 
 // 项目运行环境
 define('ENV', $env);
-
 //启动应用
-$app = new Yaf_Application(APP_PATH . DIRECTORY_SEPARATOR . 'conf' . DIRECTORY_SEPARATOR . $env . '.ini', 'base');
+$app = new Yaf\Application(APP_PATH . 'conf' . DIRECTORY_SEPARATOR . $env . '.ini','base');
+
 $app->bootstrap()->run();

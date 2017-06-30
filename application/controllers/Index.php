@@ -20,8 +20,6 @@ class IndexController extends BaseController {
      * @jsondata {"status":1,"msg":"请求成功","data":{"date":"2016年01月07日","is_read":0,"status_data":{"success":"成功"}}}
      */
     public function indexAction() {//默认Action
-        core::test();
-        die;
         $res = (new yafussModel())->getlist();
         $this->getView()->assign("res", $res);
         $this->getView()->assign("content", "Hello World");

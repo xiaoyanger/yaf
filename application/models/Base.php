@@ -29,7 +29,7 @@ class  BaseModel
     function __construct()
     {
         //配置文件
-        $this->config = Yaf_Registry::get('config');
+        $this->config = Yaf\Registry::get('config');
         //cookie初始化
         $this->cookie = ['cookie_pre' => $this->config->get('cookie')->pre, 'cookie_path' => $this->config->get('cookie')->path, 'cookie_domain' => $this->config->get('cookie')->domain];
         //删除实例化的属性,防止出错

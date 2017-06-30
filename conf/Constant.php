@@ -10,24 +10,24 @@
 defined('DS') || define('DS', DIRECTORY_SEPARATOR); // 目录分隔符简写
 
 //网站名字
-define('SITENAME', Yaf_Registry::get("config")->sitename);
+define('SITENAME', Yaf\Registry::get("config")->sitename);
 //网址url
-define('BASEURL', Yaf_Registry::get("config")->baseurl);
+define('BASEURL', Yaf\Registry::get("config")->baseurl);
 
-define('IMGURL', Yaf_Registry::get("config")->imgurl);
+define('IMGURL', Yaf\Registry::get("config")->imgurl);
 
 //阿里云图片url
-define('ALIIMGURL', Yaf_Registry::get("config")->get("oss")->imageurl);
+define('ALIIMGURL', Yaf\Registry::get("config")->get("oss")->imageurl);
 //长连接url
-define('PULLURL', Yaf_Registry::get("config")->pullurl);
+define('PULLURL', Yaf\Registry::get("config")->pullurl);
 //代码路径
-define('PATH_ROOT', Yaf_Registry::get("config")->application->directory);
+define('PATH_ROOT', Yaf\Registry::get("config")->application->directory);
 
 //代码路径
-define('AUTHKEY',Yaf_Registry::get("config")->auth_key);
+define('AUTHKEY',Yaf\Registry::get("config")->auth_key);
 
 //静态资源路径
-define('STATIC_FILE_BASE_URL', Yaf_Registry::get("config")->static_file_base_url);
+define('STATIC_FILE_BASE_URL', Yaf\Registry::get("config")->static_file_base_url);
 //上传路径
 if(ENV == 'develop'){
     define('UPLOADPATH', dirname(APP_PATH) . DS.'upload'.DS);

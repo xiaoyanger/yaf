@@ -200,11 +200,11 @@ class DbsqlModel extends  BaseModel {
 
     public function _db_clear()
     {
-        $this->_table = null;
-        $this->_condition = null;
-        $this->_field = null;
-        $this->_data = null;
-        $this->_join = null;
+        //$this->_table = null;
+        //$this->_condition = null;
+        //$this->_field = null;
+        //$this->_data = null;
+        //$this->_join = null;
     }
 
     public function _db_from($table)
