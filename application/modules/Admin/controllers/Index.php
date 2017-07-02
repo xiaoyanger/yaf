@@ -3,6 +3,10 @@
 class IndexController extends Admin\AdminCommonController {
 
     public function indexAction() {
+//        RoutePlugin::testtt();
+//        $model = new Testas;
+//        $model->test();
+//        die;
         $this->getView()->display('index/index.phtml');
     }
 

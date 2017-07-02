@@ -58,6 +58,33 @@ class AdminCommonController extends \BaseController {
         if(in_array($this->_module_name,['Admin']) ){
             if(!in_array($this->_controller_name,['Login'])){
                 $this->_data['__title__'] = $this->_module_name.'->'.$this->_action_name;
+                $this->_data['__login_out_url__'] = \Util_Helper::url('Login', 'logOut');
+                $this->_data['__nav_cat__']['_top_'] = [
+                    '0'=>[
+                        'title'=>'首页',
+                        'url'=>'/admin/index/index',
+                        'is_checked'=>1,
+                        'list'=>[
+                                0=>[
+                                    'title'=>'首页',
+                                    'url'=>'/admin/index/index',
+                                    'is_checked'=>1,
+                                ],
+                            ],
+                    ],
+                    '1'=>[
+                        'title'=>'系统设置',
+                        'url'=>'/admin/system/index',
+                        'is_checked'=>0,
+                        'list'=>[
+                            0=>[
+                                'title'=>'权限管理',
+                                'url'=>'/admin/system/rbac',
+                                'is_checked'=>1,
+                            ],
+                        ],
+                    ],
+                ];
                 $this->getView()->display(APP_ADMIN_PATH .DS.'views/menu.phtml', ['_data' => $this->_data]);
                 $this->getView()->display(APP_ADMIN_PATH .DS.'views/footer.phtml', ['_data' => $this->_data]);
             }

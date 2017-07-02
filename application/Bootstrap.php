@@ -122,7 +122,7 @@ class Bootstrap extends Yaf\Bootstrap_Abstract
      */
     public function _initAutoload()
     {
-        Yaf\Loader::import(PATH_ROOT . 'vendor/autoload.php');
+        Yaf\Loader::import(APP_PATH . 'vendor/autoload.php');
     }
 
     /**
@@ -134,5 +134,24 @@ class Bootstrap extends Yaf\Bootstrap_Abstract
     public function _initTimeZone()
     {
         date_default_timezone_set('Asia/Shanghai');
+    }
+
+    /**
+     * 插件注册
+     * @param \Yaf\Dispatcher $dispatcher
+     */
+    public function _initPlugin(Yaf\Dispatcher $dispatcher)
+    {
+        $dispatcher->registerPlugin(new RoutePlugin ());
+    }
+
+    /**
+     * 引入部分需要引入的class类
+     * @param \Yaf\Dispatcher $dispatcher
+     */
+    public function _initService(Yaf\Dispatcher $dispatcher)
+    {
+        $loader = Yaf\Loader::getInstance(APP_PATH.'Services');
+        $loader->registerLocalNamespace(array('Testas'));
     }
 }
